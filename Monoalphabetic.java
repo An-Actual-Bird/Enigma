@@ -18,6 +18,7 @@ public class Monoalphabetic
     public static JLabel A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z;
     static JPanel QRow,ARow,ZRow,Keyboard;
     static JFrame window;
+    static GridBagConstraints a,z,q;
     public static void run()
     {
 
@@ -26,36 +27,49 @@ public class Monoalphabetic
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setTitle("ENIGMA");
         window.setSize(1220,720);
-//        window.setLocationRelativeTo(null);
+        window.setLocationRelativeTo(null);
 
         QRow = new JPanel();
         ARow = new JPanel();
         ZRow = new JPanel();
         Keyboard = new JPanel();
-//
+
         QRow.setLayout(new GridBagLayout());
         ARow.setLayout(new GridBagLayout());
         ZRow.setLayout(new GridBagLayout());
+        Keyboard.setLayout(new GridBagLayout());
 
         int ARowWidthBuffer = (window.getWidth()-(int)Math.round(window.getWidth()*0.8))/2;
         int ZRowWidthBuffer = (window.getWidth()-(int)Math.round(window.getWidth()*0.7))/2;
-        Insets ARowInsets = new Insets(0,ARowWidthBuffer,ARowWidthBuffer,0);
-        Insets ZRowInsets = new Insets(0, ZRowWidthBuffer, ZRowWidthBuffer, 0);
-        GridBagConstraints a = new GridBagConstraints(RELATIVE, RELATIVE,1,1, BOTH,0,0,GridBagConstraints.NONE,ARowInsets, CENTER,0);
-        GridBagConstraints z = new GridBagConstraints(RELATIVE, RELATIVE,1,1, BOTH,0,0,GridBagConstraints.NONE,ZRowInsets, CENTER,0);
+        Insets ARowInsets = new Insets(1,ARowWidthBuffer,1,ARowWidthBuffer);
+        Insets ZRowInsets = new Insets(1, ZRowWidthBuffer,1, ZRowWidthBuffer);
+        q = new GridBagConstraints();
+        a = new GridBagConstraints();
+        z = new GridBagConstraints();
+        q.gridy = 0;
+        a.gridy = 1;
+        z.gridy = 2;
 
-        QRow.setSize(window.getWidth()*1,window.getHeight()/3);
-        ARow.setSize((int)Math.round(window.getWidth()*0.8),window.getHeight()/3);
-        ZRow.setSize((int)Math.round(window.getWidth()*0.7),window.getHeight()/3);
+        //a.insets = ARowInsets;
+        //z.insets = ZRowInsets;
+        //q.fill = HORIZONTAL;
+        //a.fill = HORIZONTAL;
+        //z.fill = HORIZONTAL;
 
-        Keyboard.setLayout(new GridLayout(3,1,10,10));
+        q.weightx = 0.5;
+        q.weighty = 0.5;
+        a.weightx = 0.5;
+        a.weighty = 0.5;
+        z.weightx = 0.5;
+        z.weighty = 0.5;
 
-        Keyboard.add(QRow, BorderLayout.CENTER);
-        Keyboard.add(ARow, BorderLayout.CENTER);
-        Keyboard.add(ZRow, BorderLayout.CENTER);
+
+        Keyboard.add(QRow,q);
+        Keyboard.add(ARow,a);
+        Keyboard.add(ZRow,z);
         addKeys();
         paint();
-        window.add(Keyboard, BorderLayout.CENTER);
+        window.add(Keyboard, BorderLayout.SOUTH);
         window.setVisible(true);
     }
 
@@ -96,34 +110,42 @@ public class Monoalphabetic
         Y = new JLabel("Y",SwingConstants.CENTER);
         Z = new JLabel("Z",SwingConstants.CENTER);
 
-        QRow.add(Q);
-        QRow.add(W);
-        QRow.add(E);
-        QRow.add(R);
-        QRow.add(T);
-        QRow.add(Y);
-        QRow.add(U);
-        QRow.add(I);
-        QRow.add(O);
-        QRow.add(P);
+        GridBagConstraints keys = new GridBagConstraints();
 
-        ARow.add(A);
-        ARow.add(S);
-        ARow.add(D);
-        ARow.add(F);
-        ARow.add(G);
-        ARow.add(H);
-        ARow.add(J);
-        ARow.add(K);
-        ARow.add(L);
+        keys.fill = BOTH;
+        keys.ipadx = window.getWidth()/10;
+        keys.ipady = window.getWidth()/10;
+        keys.weightx = 0.5;
+        keys.weighty = 0.5;
 
-        ZRow.add(Z);
-        ZRow.add(X);
-        ZRow.add(C);
-        ZRow.add(V);
-        ZRow.add(B);
-        ZRow.add(N);
-        ZRow.add(M);
+        QRow.add(Q,keys);
+        QRow.add(W,keys);
+        QRow.add(E,keys);
+        QRow.add(R,keys);
+        QRow.add(T,keys);
+        QRow.add(Y,keys);
+        QRow.add(U,keys);
+        QRow.add(I,keys);
+        QRow.add(O,keys);
+        QRow.add(P,keys);
+
+        ARow.add(A,keys);
+        ARow.add(S,keys);
+        ARow.add(D,keys);
+        ARow.add(F,keys);
+        ARow.add(G,keys);
+        ARow.add(H,keys);
+        ARow.add(J,keys);
+        ARow.add(K,keys);
+        ARow.add(L,keys);
+
+        ZRow.add(Z,keys);
+        ZRow.add(X,keys);
+        ZRow.add(C,keys);
+        ZRow.add(V,keys);
+        ZRow.add(B,keys);
+        ZRow.add(N,keys);
+        ZRow.add(M,keys);
     }
     public static void paint()
     {
@@ -148,13 +170,13 @@ public class Monoalphabetic
         K.setBackground(Color.LIGHT_GRAY);
         L.setBackground(Color.GRAY);
 
-        Z.setBackground(Color.LIGHT_GRAY);
-        X.setBackground(Color.GRAY);
-        C.setBackground(Color.LIGHT_GRAY);
-        V.setBackground(Color.GRAY);
-        B.setBackground(Color.LIGHT_GRAY);
-        N.setBackground(Color.GRAY);
-        M.setBackground(Color.LIGHT_GRAY);
+        Z.setBackground(Color.GRAY);
+        X.setBackground(Color.LIGHT_GRAY);
+        C.setBackground(Color.GRAY);
+        V.setBackground(Color.LIGHT_GRAY);
+        B.setBackground(Color.GRAY);
+        N.setBackground(Color.LIGHT_GRAY);
+        M.setBackground(Color.GRAY);
 
         Q.setOpaque(true);
         W.setOpaque(true);
