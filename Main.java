@@ -9,13 +9,13 @@ public class Main
     {
         Scanner input = new Scanner(System.in);
         System.out.println("Polyalphabetic (1) or Monoalphabetic (2)?");
-        if (input.next() == "1")
+        if (input.next().equals("1"))
         {
-            Monoalphabetic.run();
+            Polyalphabetic.run();
         }
         else
         {
-            Polyalphabetic.run();
+            Monoalphabetic.run();
         }
     }
 
